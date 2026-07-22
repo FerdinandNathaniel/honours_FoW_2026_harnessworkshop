@@ -28,7 +28,11 @@ After the skill finishes, ask the user to review the Alignment Summary. Prompt: 
 
 ## Stage 2: Spec
 
-Tell the user: "Good. Now run /spec to turn the alignment into a formal specification." If the Alignment Summary was saved to a file, tell them: "Run `/spec` and ask it to read `workshop-output/alignment.md` and write the spec to `workshop-output/spec.md`."
+Tell the user to run: 
+
+    "/spec <path to alignment.md>" 
+    
+If the Alignment Summary was saved to a file, tell them: "Run `/spec` and ask it to read `workshop-output/alignment.md` and write the spec to `workshop-output/spec.md`."
 
 Explain that the spec will cover goal, constraints, success criteria, edge cases, and stakeholders.
 
