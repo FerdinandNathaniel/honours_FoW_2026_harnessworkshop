@@ -17,12 +17,11 @@ Read the provided specification and decompose it into a numbered, ordered list o
 4. Include the relevant constraint or criterion from the spec that the task addresses.
 5. Output ONLY the numbered task list. No preamble.
 
-## Example output
+## Example output for an APM agent package
 
-1. Create an empty Python file `meeting_summary.py`
-2. Write a function `parse_notes(text)` that splits input by double-newline into sections
-3. Write a function `extract_decisions(sections)` that pulls lines starting with "Decided:" or "Decision:"
-4. Write a function `extract_actions(sections)` that pulls lines starting with "Action:" or "TODO:"
-5. Write a function `format_output(decisions, actions)` that outputs the structured format from the spec
-6. Write a `main()` function that reads stdin, calls all functions in order, prints result
-7. Test with the sample meeting notes from the spec's success criteria
+1. Update `.apm/prompts/brain-dump.prompt.md` to implement the output structure in the approved spec
+2. Update `.apm/agents/brain-dump.agent.md` to implement the agent behaviour and boundaries in the approved spec
+3. Create or update the relevant skill under `.apm/skills/` with a specific discovery description
+4. Run `apm install --target copilot` to deploy the package to VS Code
+5. Inspect the generated Copilot files and check that all three primitives were deployed
+6. Test the result with a previously unseen brain dump and evaluate it against the success criteria

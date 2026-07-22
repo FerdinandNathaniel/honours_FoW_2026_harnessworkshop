@@ -1,10 +1,9 @@
 ---
 name: Brain Dump
-description: '[fill in a short description]'
-argument-hint: '[what should the user provide?]'
-agent: ask
+description: 'FILL IN: briefly describe what this prompt does.'
+argument-hint: 'FILL IN: what should the user provide?'
 ---
 
-[Write the prompt instructions below. What should the agent do with the brain dump? What output format do you want?
+FILL IN: write the reusable instructions for structuring a brain dump.
 
-Look at meeting-summary.prompt.md for an example of a filled-in prompt template.]
+Specify what the model should do, which sections it should return, and what it should avoid. Use `.apm/prompts/meeting-summary.prompt.md` as a completed example.

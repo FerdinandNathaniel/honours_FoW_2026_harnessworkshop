@@ -7,22 +7,21 @@ disable-model-invocation: true
 
 # Execute
 
-Take a numbered task list and execute each task in order.
+Take an approved task list and build the requested deliverable. Use available editing and terminal tools: do not merely describe the changes.
 
 ## Rules
 
 1. Execute tasks one at a time, in numbered order.
-2. After each task, report: "Done: [task description]" before moving to the next.
-3. If a task cannot be completed, explain why, skip it, and note it as unresolved.
-4. After the final task, output the complete deliverable.
-5. Then list any unresolved tasks and why they were skipped.
+2. Work only in the files and scope named by the task list.
+3. Verify each task before marking it complete.
+4. If editing or terminal tools are unavailable, stop and ask the user to switch to an agent with build tools.
+5. After changing APM primitives, run `apm install --target copilot` and inspect the deployed files.
+6. Report the completed deliverable, verification performed, and unresolved tasks.
 
 ## Output flow
 
-For each task:
-- [Execute the task]
-- `Done: task description`
-
-After all tasks:
-- Full deliverable
+Return:
+- Completed tasks
+- Files created or changed
+- Deployment and validation results
 - Unresolved items (if any)

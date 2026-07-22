@@ -1,3 +1,4 @@
-.env
 apm_modules/
-.apm/
+.agents/
+.github/agents/
+.github/prompts/

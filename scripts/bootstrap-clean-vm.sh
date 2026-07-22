@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-APM_VERSION="0.24.0"
-TARGET_REPO="FerdinandNathaniel/honours_FoW_2026_harnessworkshop"
+APM_VERSION="0.26.0"
 TARGET_RUNTIME="copilot"
-NON_INTERACTIVE=0
 DRY_RUN=0
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(cd -- "$SCRIPT_DIR/.." && pwd)"
 
 usage() {
   cat <<'EOF'
@@ -15,8 +15,7 @@ Bootstrap a clean machine with APM and the workshop framework.
 
 Options:
   --target <runtime>       APM target runtime (default: copilot)
-  --apm-version <version>  Required APM CLI version (default: 0.24.0)
-  --non-interactive        Fail instead of prompting for input
+  --apm-version <version>  Required APM CLI version (default: 0.26.0)
   --dry-run                Print commands instead of executing
   -h, --help               Show this help message
 EOF
@@ -24,10 +23,6 @@ EOF
 
 log() {
   echo "[bootstrap] $*"
-}
-
-warn() {
-  echo "[bootstrap][warn] $*" >&2
 }
 
 die() {
@@ -90,10 +85,6 @@ main() {
         APM_VERSION="$2"
         shift 2
         ;;
-      --non-interactive)
-        NON_INTERACTIVE=1
-        shift
-        ;;
       --dry-run)
         DRY_RUN=1
         shift
@@ -111,10 +102,12 @@ main() {
   require_command curl
   install_apm_pinned
 
-  log "Installing workshop package $TARGET_REPO (target: $TARGET_RUNTIME)"
-  run_cmd apm install -g "$TARGET_REPO" --target "$TARGET_RUNTIME"
+  log "Deploying workshop package to $TARGET_RUNTIME"
+  pushd "$PROJECT_ROOT" >/dev/null
+  run_cmd apm install --target "$TARGET_RUNTIME"
+  popd >/dev/null
 
-  log "Bootstrap complete — all workshop skills, prompts, and agents installed"
+  log "Bootstrap complete — workshop sources deployed from .apm/"
 }
 
 main "$@"

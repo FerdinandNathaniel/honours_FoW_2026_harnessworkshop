@@ -1,17 +1,14 @@
 ---
 name: Brain Dump Assistant
-description: '[fill in a short description of what this agent does]'
-tools: [read, search]
-model: 'openrouter/deepseek/deepseek-v4-pro'
-argument-hint: '[what should the user provide? e.g. "Dump your thoughts"]'
+description: 'FILL IN: briefly describe what this agent does and when to select it.'
+argument-hint: 'FILL IN: what should the user provide?'
 user-invocable: true
-disable-model-invocation: false
 ---
 
-[Describe in clear steps what this agent does when given a brain dump. For example:
+FILL IN: briefly describe in steps what this agent does with a brain dump.
 
-1. Step one — what does the agent do first?
-2. Step two — what next?
-3. Step three — final output?
+1. What does it do first?
+2. How does it organise or assess the thoughts?
+3. What should the final output contain?
 
-Look at meeting-assistant.agent.md for an example of a filled-in agent.]
+Use `.apm/agents/meeting-assistant.agent.md` as a completed example.

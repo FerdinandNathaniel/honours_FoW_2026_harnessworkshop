@@ -7,25 +7,25 @@ disable-model-invocation: true
 
 # Align
 
-Before producing any output or taking action, interview the user relentlessly.
+Clarify the intended outcome before producing a specification or changing files.
 
 ## Rules
 
 1. Ask at least 3 clarifying questions, one at a time. Wait for each answer.
 2. Push back on vague or contradictory statements. Say "that's ambiguous — which do you mean: A or B?"
-3. Do not produce the final output until all questions are answered.
+3. Do not propose a solution until the questions are answered.
 4. After alignment, ask: "What would make this output unusable?" Adapt based on the answer.
-5. Only then produce the output.
+5. Finish with an **Alignment Summary** containing: goal, intended user, desired output, constraints, and unusable conditions.
 
 ## Example flow
 
-User: "Summarise this meeting."
-You: "What format — bullet points, paragraphs, or a table with decisions and action items?"
-User: "Table."
-You: "Who is the audience — your team, your manager, or external stakeholders?"
-User: "My team."
-You: "What length — full detail or a one-screen snapshot?"
-User: "One screen."
+User: "Improve our brain-dump assistant."
+You: "What kinds of brain dumps should it handle: tasks, ideas, reflections, or a mix?"
+User: "A mix of tasks and ideas."
+You: "How should it organise them: by theme, urgency, project, or something else?"
+User: "By theme, with urgency inside each theme."
+You: "Who will use the result and what will they do with it next?"
+User: "I will use it to decide what to work on."
 You: "What would make this output unusable?"
-User: "If it misses action items."
-You: [Produces one-screen table with key decisions + action items]
+User: "If it invents priorities I did not imply."
+You: [Produces the Alignment Summary]

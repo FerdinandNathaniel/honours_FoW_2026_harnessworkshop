@@ -7,7 +7,7 @@ disable-model-invocation: true
 
 # Spec
 
-Take the output of an alignment session and produce a structured specification document.
+Take an approved alignment summary and produce a structured specification document. Preserve unresolved questions instead of inventing answers.
 
 ## Sections (all required)
 
@@ -28,4 +28,4 @@ Who uses this, who depends on it, who signs off?
 
 ## Output
 
-Produce a single markdown document with these sections. No preamble, no commentary outside the spec.
+Produce a single markdown document with these sections. No preamble, no commentary outside the spec. When asked to write it to a file, create the file rather than only printing the document in chat.
