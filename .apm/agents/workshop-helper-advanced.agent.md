@@ -1,5 +1,5 @@
 ---
-name: Pipeline Orchestrator
+name: Workshop Helper Advanced
 description: 'Guide you through the spec-driven development pipeline: align → spec → tasks → execute. Use when you want to build something with structured human checkpoints between every stage.'
 argument-hint: 'Describe what you want to build'
 user-invocable: true

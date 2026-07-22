@@ -193,11 +193,19 @@ This combines the selected agent, the explicitly invoked prompt, and any relevan
 
 ## 4. Advanced Block: Align -> Spec -> Tasks -> Execute
 
-Now improve the package through a controlled process. Start a new Copilot Chat session, select **Agent** mode, select DeepSeek V4 Pro, and enable editing and terminal tools. Do not use the Brain Dump Assistant for this block: the executing agent needs to change files and run APM.
+Now improve the package through a controlled process. Select the **Workshop Helper Advanced** agent from the agent picker. It guides you through all four stages in order, explains what each skill produces, and pauses for human review between every stage. It tells you which slash command to run next — it does not invoke the skills itself.
 
-The four pipeline skills are manual: invoke them as slash commands.
+Tell it:
 
-Alternatively, select the **Pipeline Orchestrator** agent. It guides you through all four stages in order, explains what each skill produces, and pauses for human review between every stage. It tells you which slash command to run next — it does not invoke the skills itself.
+```text
+Improve the brain-dump prompt, skill, and agent we created. The result should help a student turn mixed tasks and ideas into a useful structure without inventing priorities.
+```
+
+The agent will walk you through `/align`, `/spec`, `/tasks`, and `/execute`. At each stage, review the output before approving and moving on.
+
+When the agent tells you to run `/execute`, switch to **Agent** mode (the executing agent needs editing and terminal tools). The Workshop Helper Advanced runs in Ask mode; only switch modes when it tells you to.
+
+If you prefer to drive the process yourself, you can invoke the four pipeline skills manually:
 
 ### Step 1: Align
 
@@ -281,7 +289,7 @@ The point is not that every task needs four stages. The point is knowing when a 
 Completed examples:
 
 - `.apm/agents/meeting-assistant.agent.md`
-- `.apm/agents/pipeline-orchestrator.agent.md`
+- `.apm/agents/workshop-helper-advanced.agent.md`
 - `.apm/prompts/meeting-summary.prompt.md`
 - `.apm/skills/align/SKILL.md`
 
