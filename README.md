@@ -14,7 +14,9 @@ You will first build these directly. Then you will improve the same package thro
 
 - VS Code with GitHub Copilot Chat installed
 - Git
+- Python 3.11 or later
 - The OpenRouter key provided during the workshop
+- On Windows: use **Git Bash** (included with Git for Windows) for all terminal commands in this workshop
 
 ### Clone and bootstrap
 
@@ -26,6 +28,8 @@ export PATH="$HOME/.local/bin:$PATH"
 ```
 
 The script installs APM 0.26.0 and deploys the workshop package to the Copilot file structure in this workspace.
+
+**After the script finishes, reload the VS Code window** so Copilot Chat discovers the deployed agents, prompts, and skills. Open the Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`) and run **Developer: Reload Window**.
 
 ### Add your OpenRouter key to VS Code
 
@@ -193,6 +197,8 @@ Now improve the package through a controlled process. Start a new Copilot Chat s
 
 The four pipeline skills are manual: invoke them as slash commands.
 
+Alternatively, select the **Pipeline Orchestrator** agent. It guides you through all four stages in order, explains what each skill produces, and pauses for human review between every stage. It tells you which slash command to run next — it does not invoke the skills itself.
+
 ### Step 1: Align
 
 Run:
@@ -275,6 +281,7 @@ The point is not that every task needs four stages. The point is knowing when a 
 Completed examples:
 
 - `.apm/agents/meeting-assistant.agent.md`
+- `.apm/agents/pipeline-orchestrator.agent.md`
 - `.apm/prompts/meeting-summary.prompt.md`
 - `.apm/skills/align/SKILL.md`
 
