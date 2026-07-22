@@ -15,8 +15,8 @@ cp .env.example .env
 # Edit .env and paste your key from the workshop chat
 
 # 4. Verify
-# Open VS Code, open Copilot Chat, select "Meeting Assistant" agent
-# Type: "summarise: The team discussed the Q3 roadmap. Decided to prioritize auth module. Action: Fabian to draft spec by Friday."
+# Open VS Code, open Copilot Chat, select "Brain Dump Assistant" agent
+# Type a stream of thoughts — anything on your mind — and see it structured
 ```
 
 If you get stuck, skip to the [Reference](#reference) section — pre-built examples are there.
@@ -27,17 +27,19 @@ If you get stuck, skip to the [Reference](#reference) section — pre-built exam
 
 Three tasks. Each builds on the previous one. The goal: add a **prompt template** and a **skill** to the default agent, then create a **new agent** that uses both.
 
+The running example: **structuring a brain dump** — taking messy, unfiltered thoughts and turning them into organised themes and priorities.
+
 ### Task 1: Add a Prompt Template
 
 Prompt templates are reusable instructions you ask the agent to follow on demand. They're simple markdown files.
 
-**Step 1:** Look at the existing `meeting-summary.prompt.md` file that came with the bootstrap — open it in VS Code to see the structure. It's a header section followed by "The prompt content — what the agent should do when this is invoked."
+**Step 1:** Look at the existing `brain-dump.prompt.md` file that came with the bootstrap — open it in VS Code to see the structure. It has a header section followed by the actual prompt content.
 
-**Step 2:** Create a new file. Inside the workshop repo, navigate to `.github/prompts/` and create `action-items.prompt.md`.
+**Step 2:** Create a new file. Inside the workshop repo, navigate to `.github/prompts/` and create `priorities.prompt.md`.
 
-**Step 3:** Copy the header structure from `meeting-summary.prompt.md`. Change the name to "Action Items" and the description to "Extract action items from meeting notes." Below the header, write: "Read the meeting notes below. Extract ONLY action items. For each, include who it's assigned to and the deadline if mentioned. Output as a bullet list."
+**Step 3:** Copy the header structure from `brain-dump.prompt.md`. Change the name to "Priorities" and the description to "Extract only the priorities and next steps from a brain dump." Below the header, write: "Read the brain dump below. Extract ONLY the priorities and next steps. Ignore everything else. Output as a numbered list with a one-sentence reason for each."
 
-**Step 4:** Test — in Copilot Chat, select the Meeting Assistant agent. Type: "Use the action-items prompt on this meeting: The team discussed Q3 roadmap. Decided to prioritize auth module. Action: Fabian to draft spec by Friday. Action: Lisa to review by Monday."
+**Step 4:** Test — in Copilot Chat, select the Brain Dump Assistant agent. Type: "Use the priorities prompt on this brain dump: I need to finish the report by Friday but also the client wants a demo next week and I haven't started the slides. Also the team is waiting on my feedback for the design review. Oh and I should probably eat lunch."
 
 ### Task 2: Add a Skill
 
@@ -49,90 +51,91 @@ Skills change how an agent behaves by default — the agent follows the skill's 
 
 **Step 3:** Copy the header structure from `align/SKILL.md`. Change the name to "tone" and write a short description. Below the header, write one line: "Always respond in a formal, professional tone."
 
-**Step 4:** In Copilot Chat, open the Meeting Assistant agent. In its settings, add `tone` to the list of skills the agent uses. (If you're unsure how, look at the skills the agent already has — add yours the same way.)
+**Step 4:** In Copilot Chat, open the Brain Dump Assistant agent. In its settings, add `tone` to the list of skills the agent uses. (If you're unsure how, look at the skills the agent already has — add yours the same way.)
 
-**Step 5:** Test — ask the Meeting Assistant to summarise a meeting. The output should sound formal and professional. Try changing the instruction to "Respond like a pirate" and test again.
+**Step 5:** Test — give the Brain Dump Assistant a brain dump. The output should sound formal and professional. Try changing the instruction to "Respond like a pirate" and test again.
 
 ### Task 3: Create a New Agent
 
-**Step 1:** Look at the existing `meeting-assistant.agent.md` in the workshop repo — open it and read the structure. The top section defines the agent's name, description, and model. The bottom section is the system prompt — what the agent always knows.
+**Step 1:** Look at the existing `brain-dump.agent.md` in the workshop repo — open it and read the structure. The top section defines the agent's name, description, and model. The bottom section is the system prompt — what the agent always knows.
 
 **Step 2:** In `.github/agents/`, create a new file called `my-agent.agent.md`.
 
-**Step 3:** Copy the structure from `meeting-assistant.agent.md`. Change the name, description, and system prompt to describe your new agent. Keep the model as `openrouter/deepseek/deepseek-v4-pro`.
+**Step 3:** Copy the structure from `brain-dump.agent.md`. Change the name, description, and system prompt to describe your new agent. Keep the model as `openrouter/deepseek/deepseek-v4-pro`.
 
-**Step 4:** In the agent's settings, add your skill from Task 2 (`tone`) and your prompt from Task 1 (`action-items`).
+**Step 4:** In the agent's settings, add your skill from Task 2 (`tone`) and your prompt from Task 1 (`priorities`).
 
-**Step 5:** Select your new agent in Copilot Chat. Give it a test meeting to summarise — it should use your skill (formal tone) and your prompt (action items). All three components — **agent + skill + prompt** — now work together.
+**Step 5:** Select your new agent in Copilot Chat. Give it a brain dump — it should use your skill (formal tone) and your prompt (priorities only). All three components — **agent + skill + prompt** — now work together.
 
 ---
 
 ## Advanced Block — Align → Spec → Decompose → Execute (15 min)
 
-The same task — meeting note summarisation — but run through a structured pipeline. Compare the output against what you built in the basics block.
+The same task — **structuring a brain dump** — but run through a structured pipeline. Compare the output against what you built in the basics block.
 
 Four skills are pre-installed: `align`, `spec`, `tasks`, `execute`. Each builds on the previous.
 
 ### Step 1: Align
 
-Activate the **align** skill on the same meeting task. It will ask you clarifying questions before producing anything.
+Activate the **align** skill on the brain-dump task. It will ask you clarifying questions before producing anything.
 
 ```
-You: "Build a meeting note summariser"
-Agent (with align skill): "What format — bullet points, paragraphs, or a table with decisions and action items?"
-You: "Table."
-Agent: "Who is the audience?"
-You: "My team."
-Agent: "What length?"
-You: "One screen."
+You: "Build a tool that structures brain dumps"
+Agent (with align skill): "What kind of brain dumps — work tasks, creative ideas, personal journaling, or all of the above?"
+You: "Work tasks mostly."
+Agent: "What output format — grouped by project, by urgency, or by type of task?"
+You: "By project, then by urgency within each project."
+Agent: "How long are the brain dumps typically — a few sentences or multiple paragraphs?"
+You: "Usually a paragraph or two."
 Agent: "What would make this output unusable?"
-You: "If it misses action items."
-Agent: [Now produces the summary]
+You: "If it mis-categorises tasks into the wrong project."
+Agent: [Now produces the structured output]
 ```
 
 ### Step 2: Spec
 
 Feed the alignment session output into the **spec** skill. It produces a structured PRD:
 
-- **Goal**: A one-screen meeting summary table with decisions and action items
-- **Constraints**: One screen, table format, team audience
-- **Success Criteria**: Must capture all action items, no missed owners
-- **Edge Cases**: Empty input → "no content to summarise"; too long → truncate with warning
-- **Stakeholders**: Team members
+- **Goal**: A brain-dump structurer that groups work tasks by project, then by urgency
+- **Constraints**: Input is 1-2 paragraphs, output is grouped by project, no external data sources
+- **Success Criteria**: Tasks correctly assigned to projects, urgency ordering is sensible, no tasks dropped
+- **Edge Cases**: Empty input → "nothing to structure"; single task → still group it; ambiguous project names → ask for clarification
+- **Stakeholders**: Individual knowledge worker using it for personal task management
 
 ### Step 3: Tasks
 
 Feed the spec into the **tasks** skill. It decomposes the PRD into an ordered task list:
 
 ```
-1. Create the output structure with Summary, Decisions, Action Items sections
-2. Write logic to extract decisions from meeting text (lines with "Decided:" or "Decision:")
-3. Write logic to extract action items (lines with "Action:" or "TODO:")
-4. Format as a table with columns: Item, Owner, Status
-5. Add edge case handling for empty input
-6. Test with sample meeting notes
+1. Create the output structure: projects as top-level groups, tasks nested under each
+2. Write logic to identify project names from the brain dump (capitalised words, known project list, or explicit mentions)
+3. Write logic to assign each task to the most likely project
+4. Write logic to rank tasks within each project by urgency (keywords: "urgent", "deadline", "ASAP", "waiting on")
+5. Handle edge cases: empty input, single task, ambiguous project names
+6. Format output as markdown with project headers and numbered task lists
+7. Test with a sample brain dump containing tasks across multiple projects
 ```
 
 ### Step 4: Execute
 
-Feed the task list into the **execute** skill. It runs each task sequentially and produces the final deliverable — a working meeting summariser.
+Feed the task list into the **execute** skill. It runs each task sequentially and produces the final deliverable — a working brain-dump structurer.
 
 ### Compare
 
 Put the basics-block output next to the advanced-block output. What changed?
 
 - The spec forced you to think about edge cases you'd skip otherwise
-- The task decomposition caught steps you'd forget
-- The alignment questions surfaced hidden assumptions about audience and format
+- The task decomposition caught steps you'd forget (like handling ambiguous project names)
+- The alignment questions surfaced hidden assumptions about grouping and urgency
 - **This is the core insight: prompts work for one-offs. Pipelines work for systems.**
 
 ---
 
 ## Reference
 
-### Pre-built Meeting Assistant (basic block)
+### Pre-built Brain Dump Assistant (basic block)
 
-The default agent installed by bootstrap. Check `.github/agents/meeting-assistant.agent.md` in the workshop repo.
+The default agent installed by bootstrap. Check `.github/agents/brain-dump.agent.md` in the workshop repo.
 
 ### Pre-built Pipeline (advanced block)
 
@@ -141,6 +144,10 @@ All four pipeline skills are installed:
 - `.agents/skills/spec/SKILL.md` — structured PRD from alignment
 - `.agents/skills/tasks/SKILL.md` — decompose spec into ordered tasks
 - `.agents/skills/execute/SKILL.md` — execute tasks sequentially
+
+### Also included: Meeting Assistant
+
+A secondary example agent for meeting note summarisation. Check `.github/agents/meeting-assistant.agent.md` and `.github/prompts/meeting-summary.prompt.md` if you want to see another pattern.
 
 ### Templates
 
