@@ -29,6 +29,8 @@ export PATH="$HOME/.local/bin:$PATH"
 
 The script installs APM 0.26.0 and deploys the workshop package to the Copilot file structure in this workspace.
 
+The `export PATH` line above only lasts for the current terminal session. If you open a new terminal later, run it again before any `apm` command. The bootstrap script also prints this reminder when it finishes.
+
 **After the script finishes, reload the VS Code window** so Copilot Chat discovers the deployed agents, prompts, and skills. Open the Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`) and run **Developer: Reload Window**.
 
 ### Add your OpenRouter key to VS Code

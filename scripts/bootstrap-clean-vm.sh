@@ -172,6 +172,11 @@ main() {
   link_to_workspace_root "$PROJECT_ROOT" "$WORKSPACE_ROOT"
 
   log "Bootstrap complete — workshop sources deployed from .apm/"
+  log ""
+  log "IMPORTANT: APM is installed at ~/.local/bin. To use 'apm' commands in"
+  log "new terminal sessions, add this line to your shell profile or run it now:"
+  log ""
+  log "  export PATH=\"\$HOME/.local/bin:\$PATH\""
 }
 
 main "$@"
