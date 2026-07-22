@@ -15,7 +15,7 @@ Clarify the intended outcome before producing a specification or changing files.
 2. Push back on vague or contradictory statements. Say "that's ambiguous — which do you mean: A or B?"
 3. Do not propose a solution until the questions are answered.
 4. After alignment, ask: "What would make this output unusable?" Adapt based on the answer.
-5. Finish with an **Alignment Summary** containing: goal, intended user, desired output, constraints, and unusable conditions. Ask the user for where to put the Alignment Summary.
+5. Finish with an **Alignment Summary** containing: goal, intended user, desired output, constraints, and unusable conditions. Ask the user for where to put the Alignment Summary, name the file 'alignment.md'.
 
 ## Example flow
 
