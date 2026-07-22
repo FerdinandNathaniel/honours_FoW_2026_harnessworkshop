@@ -1,0 +1,12 @@
+name: honours_FoW_2026_harnessworkshop
+version: 1.0.0
+description: AI Harnesses & Standardized Agent Frameworks — FoW 2026 workshop
+author: FerdinandNathaniel
+targets:
+  - copilot
+
+dependencies:
+  apm: []
+  mcp: []
+includes: auto
+scripts: {}
